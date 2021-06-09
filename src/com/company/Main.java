@@ -1,13 +1,11 @@
 package com.company;
 
-import com.sun.jdi.Value;
 
 import java.util.Scanner;
 import java.lang.*;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 import java.lang.String;
-import java.lang.Boolean;
 
 
 public class Main {
@@ -19,7 +17,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         String BirthNumber=sc.next();
         //OvereniRodneCislo(BirthNumber);
-        if(InputVerification(BirthNumber)) DatebirthVerification(BirthNumber);
+        if(InputVerification(BirthNumber)) DateBirthVerification(BirthNumber);
         else{
             System.out.println("Zadali jste špatné rodné číslo");
         }
@@ -31,20 +29,25 @@ public class Main {
         String Pattern1 ="[0-9]{6}/?[0-9]{3,4}";
         Pattern pt = Pattern.compile(Pattern1);
         Matcher mt = pt.matcher(BirthNumber);
-        boolean result = mt.matches();
-        System.out.println(result);
-        return result;
+        return mt.matches();
     }
 
     //Kontrola, zda má vstup všechny potřebné požadavky
-    public static String DatebirthVerification(String BirthNumber){
+    public static String DateBirthVerification(String BirthNumber){
         char[] dateBirth = BirthNumber.toCharArray();
-        System.out.println(dateBirth[2]);
-        if(dateBirth[3]<=1){
-
-
+        BirthNumber = BirthNumber.replaceAll("[^\\d]", "");
+        int x = Integer.parseInt(BirthNumber);
+        if((x %11 ==0) || (dateBirth[4]==1 && dateBirth[5]<3)||(dateBirth[4]==0 && dateBirth[5]>0)){
+            System.out.println("true");
+            DateBirthConvert();
             return Character.toString(dateBirth[2]);
         }
         else return errorMessage;
+    }
+
+    //Konverze vstupu do formát data narození
+    public static String DateBirthConvert(){
+
+        return "0";
     }
 }
