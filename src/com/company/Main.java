@@ -37,12 +37,18 @@ public class Main {
         char[] dateBirth = BirthNumber.toCharArray();
         BirthNumber = BirthNumber.replaceAll("[^\\d]", "");
         int x = Integer.parseInt(BirthNumber);
-        if((x %11 ==0) || (dateBirth[4]==1 && dateBirth[5]<3)||(dateBirth[4]==0 && dateBirth[5]>0)){
+        int maxDay1 = 3, maxDay2 = 1;
+        if(/*(x %11 ==0) && */(dateBirth[4]<3 && dateBirth[5]>1)||(dateBirth[4]==3 && dateBirth[5]<2)/*&&(dateBirth[2]<=3&&dateBirth[3]<=9)*/){
             System.out.println("true");
-            DateBirthConvert();
+            //DateBirthConvert();
             return Character.toString(dateBirth[2]);
         }
-        else return errorMessage;
+
+        else
+        {
+            System.out.println(errorMessage);
+            return errorMessage;
+        }
     }
 
     //Konverze vstupu do formát data narození
