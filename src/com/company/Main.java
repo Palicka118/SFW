@@ -10,7 +10,7 @@ import java.lang.Integer;
 
 public class Main {
 
-    //static final String errorMessage = "Zadali jste \u0161patn\u00E9 rodn\u00E9 \u010D\u00EDslo";
+    static final String errorMessage = "Zadali jste \u0161patn\u00E9 rodn\u00E9 \u010D\u00EDslo";
     public static void main(String[] args) {
 
         System.out.println("Zadejte prosím Vaše rodné číslo: ");
@@ -18,7 +18,7 @@ public class Main {
         String birthNumber=sc.next();
         if(InputVerification(birthNumber)) DateBirthVerification(birthNumber);
         else{
-            System.out.println("Zadali jste špatné rodné číslo");
+            System.out.println(errorMessage);
         }
 
     }
@@ -52,10 +52,11 @@ public class Main {
         int mesicInt = Integer.parseInt(mesic);
 
         //System.out.println(birthDay);
-        if((DayIsValid(birthDayInt))&&(MonthIsValid(dateBirth[2]))&&(DivideVer(dateBirth, birthNumber))){
+        if((DayIsValid(birthDayInt))&&(MonthIsValid(mesicInt))&&DivideVer(dateBirth, birthNumber)){
             System.out.println("true");
-            DateBirthConvert(birthDayInt, mesicInt, rokNarozeniInt);
+            DateBirthConvert(birthDayInt, GetGender(mesicInt), rokNarozeniInt);
         }
+        else System.out.println(errorMessage);
     }
 
     //Konverze vstupu do formát data narození
@@ -65,20 +66,17 @@ public class Main {
 
     //Kontrola měsíce
     public static boolean MonthIsValid(int Month){
-        return GetGender(Month) < 12;
+        int month = GetGender(Month);
+        return month < 12;
     }
 
-    /*public static int GetBirthMonth(){
-
-        return 0;
-    }*/
 
     public static int GetGender(int Month){
-        if(Month>5){
+        if(Month>50){
             int tmp=Month;
-            tmp=tmp-5;
-            Month=(char)tmp;
-            return Month;
+            tmp=tmp-50;
+            //int month=(char)tmp;
+            return tmp;
         }
         else return Month;
 
@@ -89,12 +87,6 @@ public class Main {
     public static boolean DayIsValid(int BirthDay){
         return BirthDay < 32;
     }
-
-
-    /*public static int GetBirthDay(int BirthDay){
-
-        return BirthDay;
-    }*/
 
 
     public static int GetBirthYear(int rokNarozeni){
